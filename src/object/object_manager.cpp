@@ -140,7 +140,7 @@ CObject* CObjectManager::CreateObject(ObjectCreateParams params)
         {
             m_nextId = params.id + 1;
         }
-    }    
+    }
 
     assert(m_objects.find(params.id) == m_objects.end());
 
@@ -151,7 +151,7 @@ CObject* CObjectManager::CreateObject(ObjectCreateParams params)
 
     CObject* objectPtr = objectUPtr.get();
 
-    m_objects[params.id] = std::move(objectUPtr);    
+    m_objects[params.id] = std::move(objectUPtr);
 
     return objectPtr;
 }
@@ -162,7 +162,7 @@ CObject* CObjectManager::CreateObject(Math::Vector pos, float angle, ObjectType 
     params.pos = pos;
     params.angle = angle;
     params.type = type;
-
+    
     if (power >= 0 && power <= 1) //prevent creation of overcharged or negatively charged power cells
     {
         params.power = power;
