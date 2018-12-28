@@ -140,13 +140,8 @@ CObject* CObjectManager::CreateObject(ObjectCreateParams params)
         {
             m_nextId = params.id + 1;
         }
-    }
+    }    
 
-    if (params.power < 0 || params.power > 1) //prevent creation of overcharged or negatively charged power cells
-    {
-        params.power = 1.0f;
-    }
-    
     assert(m_objects.find(params.id) == m_objects.end());
 
     auto objectUPtr = m_objectFactory->CreateObject(params);
@@ -156,7 +151,7 @@ CObject* CObjectManager::CreateObject(ObjectCreateParams params)
 
     CObject* objectPtr = objectUPtr.get();
 
-    m_objects[params.id] = std::move(objectUPtr);
+    m_objects[params.id] = std::move(objectUPtr);    
 
     return objectPtr;
 }
