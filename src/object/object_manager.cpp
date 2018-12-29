@@ -163,13 +163,27 @@ CObject* CObjectManager::CreateObject(Math::Vector pos, float angle, ObjectType 
     params.angle = angle;
     params.type = type;
     
-    if (power >= 0 && power <= 1) //prevent creation of overcharged or negatively charged power cells
+    if (params.type == OBJECT_POWER || params.type == OBJECT_ATOMIC) //prevent creation of overcharged or negatively charged power cells
     {
-        params.power = power;
+        if (power >= 0 && power <= 1)
+        {
+            params.power = power;
+        }
+        else
+        {
+            params.power = 1.0f;
+        }
     }
     else
     {
-        params.power = 1.0f;
+        if (power >= 0 && power <= 100)
+        {
+            params.power = power;
+        }
+        else
+        {
+            params.power = 1.0f;
+        }
     }
 
     return CreateObject(params);

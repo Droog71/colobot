@@ -3364,7 +3364,14 @@ void CRobotMain::CreateScene(bool soluce, bool fixScene, bool resetObject)
 
                 try
                 {
-                    if (params.power < 0 || params.power > 1) //prevent creation of overcharged or negatively charged power cells
+                    if (params.type == OBJECT_POWER || params.type == OBJECT_ATOMIC) //prevent creation of overcharged or negatively charged power cells
+                    {
+                        if (params.power < 0 || params.power > 1)
+                        {
+                            params.power = 1.0f;
+                        }
+                    }
+                    else if (params.power < 0 || params.power > 100)
                     {
                         params.power = 1.0f;
                     }
